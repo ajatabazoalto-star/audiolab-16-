@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flight 16 — Aviation English &amp; Present Perfect</title>
+<style>
+  :root{
+    --navy:#0b1f3a; --navy2:#122a4d; --sky:#1ea7e8; --amber:#f5a623;
+    --green:#28c76f; --red:#ea5455; --purple:#8e6ef2;
+    --ink:#122036; --paper:#f4f8fc; --card:#ffffff; --muted:#6b7c93;
+    --radius:16px; --shadow:0 8px 24px rgba(11,31,58,0.12);
+    font-family:'Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);}
+  body{min-height:100vh;}
+  header.topbar{
+    background:linear-gradient(135deg,var(--navy) 0%, var(--navy2) 100%);
+    color:#fff;padding:16px 18px 12px;position:sticky;top:0;z-index:50;
+    box-shadow:0 4px 18px rgba(0,0,0,.25);
+  }
+  .topbar-inner{max-width:1150px;margin:0 auto;}
+  .badge{
+    display:inline-block;background:var(--sky);color:#fff;font-size:11px;font-weight:700;
+    letter-spacing:1px;padding:5px 12px;border-radius:20px;text-transform:uppercase;margin-bottom:8px;
+  }
+  header.topbar h1{margin:0 0 4px;font-size:clamp(18px,3.6vw,26px);}
+  header.topbar p{margin:0 0 12px;color:#b9c8de;font-size:13px;}
+  nav.phasenav{display:flex;gap:6px;flex-wrap:wrap;}
+  nav.phasenav button{
+    flex:1 1 100px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);
+    color:#dce6f5;padding:8px 6px;border-radius:10px;font-size:11px;font-weight:600;cursor:pointer;
+    transition:.2s;text-align:center;
+  }
+  nav.phasenav button .num{display:block;font-size:9px;font-weight:800;color:var(--amber);letter-spacing:1px;margin-bottom:2px;}
+  nav.phasenav button.active{background:var(--sky);border-color:var(--sky);color:#fff;}
+  nav.phasenav button:hover:not(.active){background:rgba(255,255,255,0.16);}
+  .progress-outer{height:6px;background:rgba(255,255,255,0.15);border-radius:6px;margin-top:10px;overflow:hidden;}
+  .progress-inner{height:100%;width:0%;background:linear-gradient(90deg,var(--sky),var(--amber));transition:width .4s ease;}
+  main{max-width:1150px;margin:0 auto;padding:26px 18px 70px;}
+  .phase{display:none;animation:fadeIn .4s ease;}
+  .phase.active{display:block;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+  .phase-title{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+  .phase-title .bar{width:5px;height:26px;background:var(--sky);border-radius:3px;}
+  .phase-title h2{margin:0;font-size:clamp(19px,3.2vw,25px);}
+  .phase-sub{color:var(--muted);margin:0 0 22px;font-size:14.5px;max-width:760px;}
+  .lab-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px 22px;margin-bottom:20px;}
+  .audio-player-box{
+    background:#eef4fb;border-left:5px solid var(--sky);padding:16px 20px;border-radius:10px;
+    display:flex;align-items:center;gap:16px;margin-bottom:24px;flex-wrap:wrap;
+  }
+  .audio-btn-group{display:flex;gap:8px;flex-shrink:0;}
+  .audio-btn{
+    width:44px;height:44px;border-radius:50%;color:#fff;border:none;
+    font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+    transition:.2s;box-shadow:0 4px 12px rgba(11,31,58,0.15);
+  }
+  .audio-btn:hover{transform:scale(1.08);}
+  .audio-btn.play-btn{background:var(--sky);}
+  .audio-btn.play-btn:hover{background:var(--navy);}
+  .audio-btn.pause-btn{background:var(--amber);}
+  .audio-btn.pause-btn:hover{background:var(--red);}
+  .audio-btn.small{width:36px;height:36px;font-size:14px;}
+  .audio-info{flex:1;min-width:150px;}
+  .audio-info h4{margin:0 0 4px;font-size:15px;color:var(--navy);}
+  .audio-info p{margin:0;font-size:12.5px;color:var(--muted);}
+  .question-block{margin-bottom:24px;padding-bottom:18px;border-bottom:1px solid #eef4fb;}
+  .question-block:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+  .q-text{font-size:15.5px;font-weight:700;color:var(--ink);margin-bottom:12px;}
+  .opt-grid{display:grid;grid-template-columns:1fr;gap:10px;}
+  .opt-btn{
+    background:#f7fafd;border:2px solid #e2ebf3;border-radius:12px;padding:12px 16px;
+    font-size:14px;font-weight:600;color:var(--ink);text-align:left;cursor:pointer;transition:.15s;
+    display:flex;align-items:center;gap:10px;
+  }
+  .opt-btn:hover{border-color:var(--sky);background:#fff;}
+  .opt-btn.correct{background:#e8f9ee;border-color:var(--green);color:#1c8a4d;}
+  .opt-btn.wrong{background:#fdecec;border-color:var(--red);color:#c53030;}
+  .opt-btn:disabled{opacity:0.6;cursor:not-allowed;}
+  .tf-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .tf-btn{
+    background:#f7fafd;border:2px solid #e2ebf3;border-radius:12px;padding:14px;
+    font-size:15px;font-weight:700;color:var(--ink);cursor:pointer;transition:.15s;text-align:center;
+  }
+  .tf-btn:hover{border-color:var(--sky);background:#fff;}
+  .tf-btn.correct{background:#e8f9ee;border-color:var(--green);color:#1c8a4d;}
+  .tf-btn.wrong{background:#fdecec;border-color:var(--red);color:#c53030;}
+  .tf-btn:disabled{opacity:0.6;cursor:not-allowed;}
+  .dictation-item{margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid #eef4fb;}
+  .dictation-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+  .dictation-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+  .dictation-input{
+    flex:1 1 100%;padding:12px;border-radius:10px;border:2px solid #e2ebf3;font-size:14px;
+    font-weight:600;color:var(--ink);outline:none;min-height:60px;font-family:inherit;resize:vertical;
+  }
+  .dictation-input:focus{border-color:var(--sky);}
+  .dictation-input.correct{border-color:var(--green);background:#e8f9ee;}
+  .dictation-input.wrong{border-color:var(--red);background:#fdecec;}
+  .dictation-input:disabled{opacity:0.7;}
+  .dictation-check-btn{
+    background:var(--sky);color:#fff;border:none;padding:10px 18px;border-radius:10px;font-weight:700;
+    cursor:pointer;font-size:13.5px;transition:.2s;margin-top:10px;
+  }
+  .dictation-check-btn:hover{background:var(--navy);}
+  .dictation-check-btn:disabled{opacity:0.5;cursor:not-allowed;}
+  .dictation-feedback{font-size:13px;font-weight:700;margin-top:8px;min-height:18px;}
+  .dictation-feedback.ok{color:var(--green);}
+  .dictation-feedback.no{color:var(--red);}
+  .dictation-feedback.partial{color:var(--amber);}
+  .attempt-tag{
+    display:inline-block;font-size:11px;font-weight:800;color:var(--amber);background:#fff2da;
+    padding:3px 9px;border-radius:20px;margin-left:8px;letter-spacing:.5px;
+  }
+  .attempt-tag.maxed{color:var(--red);background:#fdecec;font-weight:900;}
+  .retry-note{
+    background:#fff6e6;border-left:5px solid var(--amber);padding:12px 16px;border-radius:10px;
+    font-size:13px;color:#7a5300;margin-bottom:20px;
+  }
+  .open-answer-input{
+    width:100%;min-height:70px;padding:12px;border-radius:10px;border:2px solid #e2ebf3;
+    font-size:14px;font-family:inherit;font-weight:600;color:var(--ink);outline:none;
+    resize:vertical;margin-top:8px;
+  }
+  .open-answer-input:focus{border-color:var(--sky);}
+  .open-answer-input:disabled{opacity:0.6;background:#f7fafd;}
+  .open-answer-input.correct{border-color:var(--green);background:#e8f9ee;}
+  .open-answer-input.wrong{border-color:var(--red);background:#fdecec;}
+  .open-check-btn{
+    background:var(--purple);color:#fff;border:none;padding:10px 20px;border-radius:10px;font-weight:700;
+    cursor:pointer;font-size:13.5px;transition:.2s;margin-top:10px;
+  }
+  .open-check-btn:hover{background:var(--navy);}
+  .open-check-btn:disabled{opacity:0.5;cursor:not-allowed;}
+  .story-section{margin-bottom:28px;padding:20px;background:#f7fafd;border-radius:14px;border:2px solid #e2ebf3;}
+  .story-section h3{color:var(--navy);margin:0 0 4px;font-size:18px;}
+  .story-section p{color:var(--muted);font-size:13px;margin:0 0 16px;}
+  /* Grammar Drill (Section 4) */
+  .grammar-card{background:#f7fafd;border:2px solid #e2ebf3;border-radius:14px;padding:20px;margin-bottom:20px;}
+  .grammar-card h3{margin:0 0 6px;color:var(--navy);font-size:17px;}
+  .grammar-card p{color:var(--muted);font-size:13px;margin:0 0 14px;}
+  .grammar-sentence{font-size:15px;font-weight:700;color:var(--ink);line-height:2;margin-bottom:14px;}
+  .grammar-gap{display:inline-block;min-width:130px;border-bottom:3px solid var(--amber);text-align:center;color:var(--amber);padding:0 4px;}
+  .grammar-choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;}
+  .grammar-choice{background:#fff;border:2px solid #e2ebf3;border-radius:10px;padding:12px;font-weight:700;font-size:13px;
+    cursor:pointer;text-align:center;transition:.15s;}
+  .grammar-choice:hover{border-color:var(--sky);}
+  .grammar-choice.correct{background:#e8f9ee;border-color:var(--green);color:#1c8a4d;}
+  .grammar-choice.wrong{background:#fdecec;border-color:var(--red);color:#c53030;}
+  .grammar-choice:disabled{opacity:0.6;cursor:not-allowed;}
+  /* Word Order */
+  .word-order-zone{min-height:52px;background:#fff;border:2px dashed #cbd5e1;border-radius:10px;padding:12px;
+    display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px;}
+  .word-token{background:var(--sky);color:#fff;padding:6px 14px;border-radius:20px;font-weight:700;font-size:13px;
+    cursor:pointer;transition:.15s;user-select:none;}
+  .word-token:hover{background:var(--navy);}
+  .word-token.placed{background:var(--green);}
+  .word-token.used{display:none;}
+  .word-pool{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+  .word-order-check{background:var(--purple);color:#fff;border:none;padding:10px 20px;border-radius:10px;font-weight:700;
+    cursor:pointer;font-size:13.5px;}
+  .word-order-check:hover{background:var(--navy);}
+  .final-wrap{max-width:750px;margin:0 auto;text-align:center;}
+  .final-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:40px 26px;}
+  .medal{font-size:80px;margin-bottom:6px;}
+  .final-card h3{font-size:26px;color:var(--navy);margin:0 0 4px;}
+  .final-card .medal-label{font-weight:800;color:var(--amber);text-transform:uppercase;letter-spacing:1px;font-size:13px;margin-bottom:18px;}
+  .final-score-big{font-size:52px;font-weight:900;color:var(--sky);margin-bottom:4px;}
+  .final-score-sub{color:var(--muted);font-size:13px;margin-bottom:26px;}
+  .final-breakdown{display:flex;flex-direction:column;gap:12px;text-align:left;margin-bottom:26px;}
+  .fb-row{display:flex;align-items:center;gap:12px;}
+  .fb-row .fb-label{width:200px;font-size:13px;font-weight:700;color:var(--ink);flex-shrink:0;}
+  .fb-row .fb-bar-outer{flex:1;height:10px;background:#e2ebf3;border-radius:6px;overflow:hidden;}
+  .fb-row .fb-bar-inner{height:100%;background:linear-gradient(90deg,var(--sky),var(--green));border-radius:6px;}
+  .fb-row .fb-val{width:60px;text-align:right;font-size:12.5px;font-weight:800;color:var(--muted);}
+  .restart-btn{background:var(--amber);border:none;color:#3a2600;padding:13px 26px;border-radius:10px;font-weight:800;cursor:pointer;font-size:14.5px;}
+  .restart-btn:hover{background:var(--sky);color:#fff;}
+  .result-box{margin-top:20px;padding:20px;border-radius:12px;font-weight:700;font-size:18px;}
+  .result-box.pass{background:#e8f9ee;color:var(--green);border:2px solid var(--green);}
+  .result-box.fail{background:#fdecec;color:var(--red);border:2px solid var(--red);}
+  footer.bottom{text-align:center;color:var(--muted);font-size:12px;padding:20px;}
+  footer.bottom span{color:var(--sky);font-weight:700;}
+  @media(max-width:640px){
+    nav.phasenav{gap:5px;}
+    nav.phasenav button{font-size:10px;padding:7px 4px;}
+    .fb-row .fb-label{width:130px;font-size:11px;}
+    .audio-player-box{gap:10px;}
+    .audio-btn-group{gap:5px;}
+    .audio-btn{width:38px;height:38px;font-size:15px;}
+    .grammar-choices{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <span class="badge">Aviation English · Flight 16</span>
+    <h1>Flight 16 — Aviation English &amp; Present Perfect</h1>
+    <p>Essential Verbs, Cabin &amp; Flight Deck Vocabulary, and Grammar Structures · ICAO A2</p>
+    <nav class="phasenav" id="phaseNav">
+      <button class="phase-btn active" data-phase="1"><span class="num">SECTION 1</span>Dictation</button>
+      <button class="phase-btn" data-phase="2"><span class="num">SECTION 2</span>Listening (Medium)</button>
+      <button class="phase-btn" data-phase="3"><span class="num">SECTION 3</span>Listening (Long)</button>
+      <button class="phase-btn" data-phase="4"><span class="num">SECTION 4</span>Grammar Drill</button>
+      <button class="phase-btn" data-phase="5"><span class="num">SECTION 5</span>Stories (15)</button>
+      <button class="phase-btn" data-phase="6"><span class="num">SECTION 6</span>Final Review</button>
+    </nav>
+    <div class="progress-outer"><div class="progress-inner" id="topProgress"></div></div>
+  </div>
+</header>
+
+<main>
+
+  <!-- SECTION 1 -->
+  <section class="phase active" id="phase1">
+    <div class="phase-title"><span class="bar"></span><h2>Section 1: Dictation — Listen and Write the Full Sentence</h2></div>
+    <p class="phase-sub">Listen to each sentence and write it completely. 3 attempts per sentence. 80% accuracy required to pass.</p>
+    <div class="retry-note">💡 Escucha la oración completa y escríbela exactamente como la oyes. Se aceptan pequeños errores ortográficos.</div>
+    <div class="lab-card" id="dictationArea"></div>
+  </section>
+
+  <!-- SECTION 2 -->
+  <section class="phase" id="phase2">
+    <div class="phase-title"><span class="bar"></span><h2>Section 2: Medium Listening — Present Perfect in Action</h2></div>
+    <p class="phase-sub">Listen to two short ATC transmissions and answer the questions. 3 attempts per MCQ, 1 attempt for T/F.</p>
+    <div id="listenMediumArea"></div>
+  </section>
+
+  <!-- SECTION 3 -->
+  <section class="phase" id="phase3">
+    <div class="phase-title"><span class="bar"></span><h2>Section 3: Long Listening — Cabin &amp; Flight Deck</h2></div>
+    <p class="phase-sub">Listen to the long passage and answer the questions. 3 attempts per MCQ, 1 attempt for T/F.</p>
+    <div id="listenLongArea"></div>
+  </section>
+
+  <!-- SECTION 4 — GRAMMAR DRILL (NEW) -->
+  <section class="phase" id="phase4">
+    <div class="phase-title"><span class="bar"></span><h2>Section 4: Present Perfect Grammar Drill</h2></div>
+    <p class="phase-sub">Complete the Present Perfect structures using have/has + past participle and signal words (already, yet, just, ever, never, since, for).</p>
+    <div class="retry-note">📝 <strong>3 attempts maximum</strong> per exercise. Cada intento fallido cuenta como error.</div>
+    <div class="lab-card" id="grammarArea"></div>
+  </section>
+
+  <!-- SECTION 5 -->
+  <section class="phase" id="phase5">
+    <div class="phase-title"><span class="bar"></span><h2>Section 5: Three Stories — 15 Exercises</h2></div>
+    <p class="phase-sub">Listen to each story and complete the 5 exercises (1 T/F + 1 MCQ + 3 Open Answer).</p>
+    <div class="retry-note">💡 Cada historia tiene 5 ejercicios. 3 intentos máximo por MCQ y Open. T/F tiene 1 solo intento.</div>
+    <div id="storiesArea"></div>
+  </section>
+
+  <!-- SECTION 6 -->
+  <section class="phase" id="phase6">
+    <div class="phase-title"><span class="bar"></span><h2>Final Review &amp; Operational Summary</h2></div>
+    <p class="phase-sub">Comprehensive evaluation of your Flight 16 performance.</p>
+    <div class="final-wrap" id="finalArea"></div>
+  </section>
+
+</main>
+
+<footer class="bottom">✈️ Flight 16 Complete · <span>Aviation English &amp; Present Perfect · ICAO A2</span></footer>
+
+<script>
+/* ============================================================
+   AUDIO SCRIPTS
+   ============================================================ */
+const AUDIOS = {
+  d1: "The captain has already contacted the control tower.",
+  d2: "The flight has been extremely smooth so far.",
+  d3: "We have descended from flight level three five zero to flight level two four zero.",
+  d4: "The flight attendants have already secured the galley.",
+  d5: "We haven't moved toward the active runway yet.",
+  d6: "The ground handlers have already removed the air stairs.",
+  d7: "The cabin crew has just armed all the emergency slides.",
+  d8: "We haven't completed the final safety demonstration video yet.",
+  d9: "My first officer has just updated the flight management computer.",
+  d10: "Have you ever experienced windshear during approach?",
+
+  s2a: "Good morning, this is the captain speaking. We have already contacted the control tower to verify our departure schedule. Air traffic control has given us the initial heading and our active clearance for takeoff. The flight has been extremely smooth so far, and we haven't experienced any major turbulence since we left the gate. Have you ever flown with us before? We have just been cleared for pushback.",
+
+  s2b: "Hello everyone, this is your lead flight attendant. We have already secured the galley and checked every single bulkhead. The cabin crew has just armed all the emergency slides. We haven't completed the final safety demonstration video yet, but we will start it as soon as the main cabin door closes. Have you ever read the safety card in the seat pocket? Please do so now. Safety is always our number one priority.",
+
+  s3: "This is the flight deck. The flight has been extremely smooth so far and we haven't experienced any major turbulence since we left the gate. However, midway through our route, the weather conditions have changed dramatically. Because of heavy storms ahead, we have decided to divert our flight plan to an alternate destination. My first officer has just updated the flight management computer with the new waypoints, and we have descended from flight level three five zero to flight level two four zero safely. We have never faced this exact type of crosswind before, but our preparation and pre-flight checks have helped us manage the situation. The runway at our alternate airport is in sight and we are ready for the final approach. The cabin crew has already prepared the cabin for landing.",
+
+  story1: "Good morning. Today has been a very demanding day in the flight deck, but everything is under control. We have already contacted the control tower to verify our departure schedule, and air traffic control has given us the initial heading and our active clearance for takeoff. The flight has been extremely smooth so far, and we haven't experienced any major turbulence since we left the gate. However, midway through our route, the weather conditions changed dramatically. Because of heavy storms ahead, we have decided to divert our flight plan to an alternate destination. Right now, my first officer has just updated the flight management computer with the new waypoints, and we have descended from flight level three five zero to flight level two four zero safely. We have never faced this exact type of crosswind before, but our preparation and pre-flight checks have helped us manage the situation. The runway at our alternate airport is in sight, and we are ready for the final approach.",
+
+  story2: "Hello everyone. Let me tell you about my experience at the airport today. I arrived at the terminal two hours before my flight, and the check-in process has been fast and easy lately. After passing security, I walked straight to the boarding gate. The gate agents announced that we have started to board the aircraft in an orderly manner. When I entered the cabin, I placed my heavy backpack in the overhead bin right above my seat, and I stored my small bag under the seat in front of me, just where the life vest is located. The flight attendants are working very hard today. They have already secured the galley and checked every single bulkhead to make sure everything is in place for departure. Right now, we are seated on the plane, but we haven't moved toward the active runway yet because we are waiting for one final luggage clearance from the ground crew. I have just looked out the window, and the ground handlers have already removed the air stairs. We are almost ready to go!",
+
+  story3: "Hi team. My shift today started very early, and it has been a very busy morning in the cabin. First, I reported to the galley to check all the catering supplies and equipment before the passengers arrived. As soon as the boarding process began, my colleagues and I have welcomed hundreds of passengers on board. We have already assisted several travelers with storing their luggage in the overhead compartments. Just ten minutes ago, the captain has contacted us via the interphone to inform us that we are ready for pushback. Because of that, the cabin crew has just armed all the emergency slides, and we have checked that every bulkhead and exit door is completely secure. We haven't completed the final safety demonstration video yet, but we will start it as soon as the main cabin door closes. Safety is always our number one priority, and we have worked together as a great team today."
+};
+
+/* ============================================================
+   AUDIO PLAYER — PLAY (restart) / PAUSE
+   ============================================================ */
+let currentAudioKey = null;
+
+function playAudio(key){
+  if(!('speechSynthesis' in window)) return;
+  // Always cancel (this restarts from the beginning, avoiding the resume bug)
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(AUDIOS[key]);
+  u.lang = 'en-US';
+  u.rate = 0.82;
+  u.pitch = 1;
+  const voices = window.speechSynthesis.getVoices();
+  const enVoice = voices.find(v => v.lang === 'en-US') || voices.find(v => v.lang && v.lang.startsWith('en'));
+  if(enVoice) u.voice = enVoice;
+  currentAudioKey = key;
+  u.onend = function(){ currentAudioKey = null; };
+  u.onerror = function(){ currentAudioKey = null; };
+  window.speechSynthesis.speak(u);
+}
+
+function pauseAudio(){
+  if(!('speechSynthesis' in window)) return;
+  if(window.speechSynthesis.speaking && !window.speechSynthesis.paused){
+    window.speechSynthesis.pause();
+  }
+}
+window.speechSynthesis && window.speechSynthesis.getVoices();
+
+/* ============================================================
+   SOUND FX
+   ============================================================ */
+let audioCtx;
+function getCtx(){
+  if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  return audioCtx;
+}
+function playDing(){
+  try{
+    const ctx = getCtx();
+    [880, 1320].forEach((freq, i)=>{
+      const osc = ctx.createOscillator(); const gain = ctx.createGain();
+      osc.type='sine'; osc.frequency.value=freq;
+      const start=ctx.currentTime+i*0.09;
+      gain.gain.setValueAtTime(0.0001,start);
+      gain.gain.exponentialRampToValueAtTime(0.25,start+0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001,start+0.25);
+      osc.connect(gain).connect(ctx.destination);
+      osc.start(start); osc.stop(start+0.28);
+    });
+  }catch(e){}
+}
+function playBuzz(){
+  try{
+    const ctx = getCtx();
+    const osc = ctx.createOscillator(); const gain = ctx.createGain();
+    osc.type='sawtooth'; osc.frequency.value=130;
+    const start=ctx.currentTime;
+    gain.gain.setValueAtTime(0.0001,start);
+    gain.gain.exponentialRampToValueAtTime(0.2,start+0.03);
+    gain.gain.exponentialRampToValueAtTime(0.0001,start+0.35);
+    osc.connect(gain).connect(ctx.destination);
+    osc.start(start); osc.stop(start+0.38);
+  }catch(e){}
+}
+
+/* ============================================================
+   UTILITIES
+   ============================================================ */
+function shuffle(arr){
+  const a = [...arr];
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+function normalize(str){
+  return str.toLowerCase().replace(/[^a-z0-9\s]/g,'').split(/\s+/).filter(Boolean);
+}
+function similarity(target, heard){
+  const t = normalize(target);
+  const h = normalize(heard);
+  if(t.length === 0) return 0;
+  let hits = 0;
+  const hCopy = [...h];
+  t.forEach(word => {
+    const idx = hCopy.indexOf(word);
+    if(idx !== -1){ hits++; hCopy.splice(idx,1); }
+  });
+  return hits / t.length;
+}
+
+/* ============================================================
+   GLOBAL STATS
+   ============================================================ */
+const STATS = {
+  totalCorrect: 0,
+  totalWrong: 0,
+  sections: {
+    s1: { correct: 0, wrong: 0, max: 10 },
+    s2: { correct: 0, wrong: 0, max: 8 },
+    s3: { correct: 0, wrong: 0, max: 5 },
+    s4: { correct: 0, wrong: 0, max: 10 },
+    s5: { correct: 0, wrong: 0, max: 15 }
+  }
+};
+function addCorrect(sec){ STATS.totalCorrect++; STATS.sections[sec].correct++; }
+function addWrong(sec){ STATS.totalWrong++; STATS.sections[sec].wrong++; }
+
+/* ============================================================
+   SECTION 1 — DICTATION
+   ============================================================ */
+const DICTATION = [
+  { id:'d1', key:'d1', text:'The captain has already contacted the control tower.' },
+  { id:'d2', key:'d2', text:'The flight has been extremely smooth so far.' },
+  { id:'d3', key:'d3', text:'We have descended from flight level three five zero to flight level two four zero.' },
+  { id:'d4', key:'d4', text:'The flight attendants have already secured the galley.' },
+  { id:'d5', key:'d5', text:"We haven't moved toward the active runway yet." },
+  { id:'d6', key:'d6', text:'The ground handlers have already removed the air stairs.' },
+  { id:'d7', key:'d7', text:'The cabin crew has just armed all the emergency slides.' },
+  { id:'d8', key:'d8', text:"We haven't completed the final safety demonstration video yet." },
+  { id:'d9', key:'d9', text:'My first officer has just updated the flight management computer.' },
+  { id:'d10', key:'d10', text:'Have you ever experienced windshear during approach?' }
+];
+
+const dictState = {};
+
+function buildDictation(){
+  const area = document.getElementById('dictationArea');
+  area.innerHTML = DICTATION.map((item, i) => {
+    dictState[item.id] = { attempts:0, solved:false, maxAttempts:3 };
+    return `
+      <div class="dictation-item" id="${item.id}">
+        <div class="dictation-row">
+          <div class="audio-btn-group">
+            <button class="audio-btn play-btn small" onclick="playAudio('${item.key}')">🔊</button>
+            <button class="audio-btn pause-btn small" onclick="pauseAudio()">⏸</button>
+          </div>
+          <span style="font-weight:700;color:var(--navy);">Sentence ${i+1}: <span class="attempt-tag" id="${item.id}-tag">0/3 attempts</span></span>
+        </div>
+        <textarea class="dictation-input" id="${item.id}-input" placeholder="Write the full sentence here..." style="margin-top:10px;"></textarea>
+        <button class="dictation-check-btn" id="${item.id}-check" onclick="checkDictation('${item.id}')">Check Dictation</button>
+        <div class="dictation-feedback" id="${item.id}-fb"></div>
+      </div>
+    `;
+  }).join('');
+}
+
+function checkDictation(id){
+  const state = dictState[id];
+  if(state.solved) return;
+  if(state.attempts >= state.maxAttempts) return;
+
+  const item = DICTATION.find(x => x.id === id);
+  const input = document.getElementById(id+'-input');
+  const fb = document.getElementById(id+'-fb');
+  const tag = document.getElementById(id+'-tag');
+  const val = input.value.trim();
+
+  if(val.length < 5){
+    fb.textContent = '⚠️ Please write a complete sentence.';
+    fb.className = 'dictation-feedback no';
+    return;
+  }
+
+  const score = similarity(item.text, val);
+  const pct = Math.round(score*100);
+
+  if(pct >= 80){
+    state.solved = true;
+    input.disabled = true;
+    input.classList.add('correct');
+    addCorrect('s1');
+    fb.textContent = `✔ Correct! ${pct}% accuracy. Full sentence: "${item.text}"`;
+    fb.className = 'dictation-feedback ok';
+    playDing();
+    document.getElementById(id+'-check').disabled = true;
+    tag.textContent = '✔ Solved';
+    tag.style.color = 'var(--green)';
+    tag.style.background = '#e8f9ee';
+  } else {
+    state.attempts++;
+    addWrong('s1');
+    input.classList.add('wrong');
+    const rem = state.maxAttempts - state.attempts;
+    if(pct >= 50){
+      fb.textContent = `⚠️ Partial: ${pct}% accuracy. You need 80%. ${rem} attempts left.`;
+      fb.className = 'dictation-feedback partial';
+    } else {
+      fb.textContent = `❌ ${pct}% accuracy. You need 80%. ${rem} attempts left.`;
+      fb.className = 'dictation-feedback no';
+    }
+    playBuzz();
+    tag.textContent = state.attempts + '/3 attempts';
+    tag.style.color = 'var(--red)';
+    tag.style.background = '#fdecec';
+    setTimeout(()=>{ input.classList.remove('wrong'); }, 800);
+
+    if(state.attempts >= state.maxAttempts){
+      input.disabled = true;
+      document.getElementById(id+'-check').disabled = true;
+      tag.textContent = '❌ Max attempts (3/3)';
+      tag.className = 'attempt-tag maxed';
+      fb.textContent = `❌ Maximum attempts reached. Correct sentence: "${item.text}"`;
+    }
+  }
+}
+
+/* ============================================================
+   SECTIONS 2 & 3 — LISTENING
+   ============================================================ */
+const LISTEN_MEDIUM = [
+  { id:'lm_a', audio:'s2a', title:'Audio A — Captain\'s Pre-Flight Briefing', sub:'Present Perfect in pilot communications',
+    questions:[
+      { id:'lm_a1', type:'mcq', q:'According to the captain, what has the crew already done BEFORE receiving the initial heading?',
+        options:[
+          {t:'Contacted the control tower to verify the departure schedule', c:true},
+          {t:'Started the engines and completed the pre-flight checklist', c:false},
+          {t:'Completed the safety demonstration video', c:false}
+        ]},
+      { id:'lm_a2', type:'tf', q:'The captain mentions that the flight has been smooth since leaving the gate.', answer:true },
+      { id:'lm_a3', type:'mcq', q:'What does the captain say about the turbulence since leaving the gate?',
+        options:[
+          {t:'They have not experienced any major turbulence', c:true},
+          {t:'They have experienced severe turbulence the entire flight', c:false},
+          {t:'They have experienced light turbulence only during climb', c:false}
+        ]},
+      { id:'lm_a4', type:'mcq', q:'Why does the captain ask the passengers "Have you ever flown with us before?"',
+        options:[
+          {t:'Because it is a standard welcome question in the greeting', c:true},
+          {t:'Because the crew has a safety concern about a passenger', c:false},
+          {t:'Because they are checking if passengers have valid tickets', c:false}
+        ]}
+    ]
+  },
+  { id:'lm_b', audio:'s2b', title:'Audio B — Cabin Crew Safety Announcement', sub:'Present Perfect in cabin operations',
+    questions:[
+      { id:'lm_b1', type:'mcq', q:'What has the cabin crew checked in addition to securing the galley?',
+        options:[
+          {t:'Every single bulkhead', c:true},
+          {t:'Only the overhead bins', c:false},
+          {t:'The cockpit instruments', c:false}
+        ]},
+      { id:'lm_b2', type:'tf', q:'The cabin crew has not yet completed the safety demonstration video.', answer:true },
+      { id:'lm_b3', type:'mcq', q:'According to the announcement, when will the safety demonstration video start?',
+        options:[
+          {t:'As soon as the main cabin door closes', c:true},
+          {t:'After takeoff', c:false},
+          {t:'When the seatbelt sign turns on', c:false}
+        ]},
+      { id:'lm_b4', type:'mcq', q:'What does the flight attendant ask the passengers to do right now?',
+        options:[
+          {t:'Read the safety card in the seat pocket', c:true},
+          {t:'Fasten their seatbelts immediately', c:false},
+          {t:'Turn off all electronic devices', c:false}
+        ]}
+    ]
+  }
+];
+
+const LISTEN_LONG = [
+  { id:'ll', audio:'s3', title:'Flight Deck Report — Weather Diversion', sub:'Long passage with Present Perfect',
+    questions:[
+      { id:'ll_1', type:'mcq', q:'When did the weather conditions change dramatically during the flight?',
+        options:[
+          {t:'Midway through the route', c:true},
+          {t:'Just after takeoff', c:false},
+          {t:'During the final approach', c:false}
+        ]},
+      { id:'ll_2', type:'tf', q:'The crew has faced this exact type of crosswind many times before.', answer:false },
+      { id:'ll_3', type:'mcq', q:'What did the crew do with the flight management computer?',
+        options:[
+          {t:'They updated it with new waypoints for the alternate destination', c:true},
+          {t:'They reset it after a computer failure', c:false},
+          {t:'They turned it off to save power', c:false}
+        ]},
+      { id:'ll_4', type:'mcq', q:'What has helped the crew manage the difficult crosswind situation?',
+        options:[
+          {t:'Their preparation and pre-flight checks', c:true},
+          {t:'The autopilot system', c:false},
+          {t:'Ground crew assistance', c:false}
+        ]},
+      { id:'ll_5', type:'mcq', q:'At the end of the report, what is the situation with the alternate airport?',
+        options:[
+          {t:'The runway is in sight and they are ready for final approach', c:true},
+          {t:'They have been told to hold at FL240', c:false},
+          {t:'They have been diverted to a third airport', c:false}
+        ]}
+    ]
+  }
+];
+
+const listenState = {};
+
+function buildListening(containerId, dataList, sectionKey){
+  const container = document.getElementById(containerId);
+  container.innerHTML = dataList.map(item => {
+    const questionsHTML = item.questions.map((q, qi) => {
+      listenState[q.id] = { attempts:0, solved:false, maxAttempts: q.type === 'tf' ? 1 : 3 };
+      if(q.type === 'mcq'){
+        const shuffled = shuffle([...q.options]);
+        return `
+          <div class="question-block" id="${q.id}">
+            <div class="q-text">${qi+1}. ${q.q} <span class="attempt-tag" id="${q.id}-tag">0/3 attempts</span></div>
+            <div class="opt-grid">
+              ${shuffled.map(o => `<button class="opt-btn" onclick="checkListenMCQ('${q.id}', this, ${o.c}, '${sectionKey}')">${o.t}</button>`).join('')}
+            </div>
+          </div>
+        `;
+      } else {
+        return `
+          <div class="question-block" id="${q.id}">
+            <div class="q-text">${qi+1}. [T/F] ${q.q} <span class="attempt-tag" id="${q.id}-tag">1 attempt only</span></div>
+            <div class="tf-grid">
+              <button class="tf-btn" onclick="checkListenTF('${q.id}', this, true, ${q.answer}, '${sectionKey}')">✅ TRUE</button>
+              <button class="tf-btn" onclick="checkListenTF('${q.id}', this, false, ${q.answer}, '${sectionKey}')">❌ FALSE</button>
+            </div>
+          </div>
+        `;
+      }
+    }).join('');
+    return `
+      <div class="lab-card">
+        <div class="audio-player-box">
+          <div class="audio-btn-group">
+            <button class="audio-btn play-btn" onclick="playAudio('${item.audio}')">🔊</button>
+            <button class="audio-btn pause-btn" onclick="pauseAudio()">⏸</button>
+          </div>
+          <div class="audio-info">
+            <h4>${item.title}</h4>
+            <p>${item.sub}</p>
+          </div>
+        </div>
+        ${questionsHTML}
+      </div>
+    `;
+  }).join('');
+}
+
+function checkListenMCQ(qid, btn, isCorrect, sec){
+  const state = listenState[qid];
+  if(state.solved) return;
+  if(state.attempts >= state.maxAttempts) return;
+
+  const block = document.getElementById(qid);
+  const tag = document.getElementById(qid+'-tag');
+
+  if(isCorrect){
+    btn.classList.add('correct');
+    block.querySelectorAll('.opt-btn').forEach(b => { b.style.pointerEvents='none'; b.disabled=true; });
+    state.solved = true;
+    addCorrect(sec);
+    playDing();
+    tag.textContent = '✔ Correct! (' + (state.attempts+1) + '/3)';
+    tag.style.color = 'var(--green)';
+    tag.style.background = '#e8f9ee';
+  } else {
+    btn.classList.add('wrong');
+    state.attempts++;
+    addWrong(sec);
+    playBuzz();
+    const rem = state.maxAttempts - state.attempts;
+    tag.textContent = state.attempts + '/3 attempts — ' + rem + ' left';
+    tag.style.color = 'var(--red)';
+    tag.style.background = '#fdecec';
+    setTimeout(()=>{ btn.classList.remove('wrong'); }, 600);
+
+    if(state.attempts >= state.maxAttempts){
+      block.querySelectorAll('.opt-btn').forEach(b => { b.style.pointerEvents='none'; b.disabled=true; });
+      tag.textContent = '❌ Max attempts (3/3)';
+      tag.className = 'attempt-tag maxed';
+    }
+  }
+}
+
+function checkListenTF(qid, btn, chosen, answer, sec){
+  const state = listenState[qid];
+  if(state.solved) return;
+
+  const block = document.getElementById(qid);
+  const tag = document.getElementById(qid+'-tag');
+  const isCorrect = chosen === answer;
+
+  // T/F: only 1 attempt
+  if(isCorrect){
+    btn.classList.add('correct');
+    block.querySelectorAll('.tf-btn').forEach(b => { b.style.pointerEvents='none'; b.disabled=true; });
+    state.solved = true;
+    addCorrect(sec);
+    playDing();
+    tag.textContent = '✔ Correct!';
+    tag.style.color = 'var(--green)';
+    tag.style.background = '#e8f9ee';
+  } else {
+    btn.classList.add('wrong');
+    block.querySelectorAll('.tf-btn').forEach(b => { b.style.pointerEvents='none'; b.disabled=true; });
+    // Mark the correct one
+    block.querySelectorAll('.tf-btn').forEach(b => {
+      const isTrue = b.textContent.includes('TRUE');
+      if((isTrue && answer === true) || (!isTrue && answer === false)){
+        b.classList.add('correct');
+      }
+    });
+    state.attempts++;
+    addWrong(sec);
+    playBuzz();
+    tag.textContent = '❌ Incorrect (1 attempt only)';
+    tag.className = 'attempt-tag maxed';
+  }
+}
+
+/* ============================================================
+   SECTION 4 — PRESENT PERFECT GRAMMAR DRILL
+   ============================================================ */
+const GRAMMAR_DRILL = [
+  { id:'g1', type:'mcq', q:'The captain ______ (already / contact) ATC.',
+    options:[
+      {t:'has already contacted', c:true},
+      {t:'have already contacted', c:false},
+      {t:'already contacts', c:false},
+      {t:'is contacting already', c:false}
+    ]},
+  { id:'g2', type:'mcq', q:'______ the cabin crew ______ (secure) the galley yet?',
+    options:[
+      {t:'Have / secured', c:true},
+      {t:'Has / secured', c:false},
+      {t:'Did / secure', c:false},
+      {t:'Is / securing', c:false}
+    ]},
+  { id:'g3', type:'mcq', q:'The crew ______ (just / arm) the emergency slides.',
+    options:[
+      {t:'has just armed', c:true},
+      {t:'have just armed', c:false},
+      {t:'just arm', c:false},
+      {t:'is just arming', c:false}
+    ]},
+  { id:'g4', type:'mcq', q:'We ______ (not / move) toward the runway yet.',
+    options:[
+      {t:"haven't moved", c:true},
+      {t:"hasn't moved", c:false},
+      {t:"didn't moved", c:false},
+      {t:"aren't moving", c:false}
+    ]},
+  { id:'g5', type:'mcq', q:'The First Officer ______ (update) the FMC with new waypoints.',
+    options:[
+      {t:'has updated', c:true},
+      {t:'have updated', c:false},
+      {t:'has update', c:false},
+      {t:'is update', c:false}
+    ]},
+  { id:'g6', type:'mcq', q:'Have you ______ experienced windshear during approach?',
+    options:[
+      {t:'ever', c:true},
+      {t:'never', c:false},
+      {t:'yet', c:false},
+      {t:'already', c:false}
+    ]},
+  { id:'g7', type:'mcq', q:'I have ______ missed a pre-flight check in my career.',
+    options:[
+      {t:'never', c:true},
+      {t:'ever', c:false},
+      {t:'already', c:false},
+      {t:'since', c:false}
+    ]},
+  { id:'g8', type:'mcq', q:'The flight has been smooth ______ we left the gate.',
+    options:[
+      {t:'since', c:true},
+      {t:'for', c:false},
+      {t:'yet', c:false},
+      {t:'just', c:false}
+    ]},
+  { id:'g9', type:'mcq', q:'The crew has been on duty ______ eight hours.',
+    options:[
+      {t:'for', c:true},
+      {t:'since', c:false},
+      {t:'already', c:false},
+      {t:'yet', c:false}
+    ]},
+  { id:'g10', type:'mcq', q:'We haven\'t completed the safety demonstration ______.',
+    options:[
+      {t:'yet', c:true},
+      {t:'already', c:false},
+      {t:'just', c:false},
+      {t:'ever', c:false}
+    ]}
+];
+
+const grammarState = {};
+
+function buildGrammar(){
+  const area = document.getElementById('grammarArea');
+  area.innerHTML = GRAMMAR_DRILL.map((q, i) => {
+    grammarState[q.id] = { attempts:0, solved:false, maxAttempts:3 };
+    const shuffled = shuffle([...q.options]);
+    return `
+      <div class="question-block" id="${q.id}">
+        <div class="q-text">${i+1}. Complete with Present Perfect: <span class="attempt-tag" id="${q.id}-tag">0/3 attempts</span></div>
+        <div class="grammar-sentence">${q.q}</div>
+        <div class="grammar-choices">
+          ${shuffled.map(o => `<button class="grammar-choice" onclick="checkGrammar('${q.id}', this, ${o.c})">${o.t}</button>`).join('')}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function checkGrammar(qid, btn, isCorrect){
+  const state = grammarState[qid];
+  if(state.solved) return;
+  if(state.attempts >= state.maxAttempts) return;
+
+  const block = document.getElementById(qid);
+  const tag = document.getElementById(qid+'-tag');
+
+  if(isCorrect){
+    btn.classList.add('correct');
+    block.querySelectorAll('.grammar-choice').forEach(b => { b.style.pointerEvents='none'; b.disabled=true; });
+    state.solved = true;
+    addCorrect('s4');
+    playDing();
+    tag.textContent = '✔ Correct! (' + (state.attempts+1) + '/3)';
+    tag.style.color = 'var(--green)';
+    tag.style.background = '#e8f9ee';
+  } else {
+    btn.classList.add('wrong');
+    state.attempts++;
+    addWrong('s4');
+    playBuzz();
+    const rem = state.maxAttempts - state.attempts;
+    tag.textContent = state.attempts + '/3 attempts — ' + rem + ' left';
+    tag.style.color = 'var(--red)';
+    tag.style.background = '#fdecec';
+    setTimeout(()=>{ btn.classList.remove('wrong'); }, 600);
+
+    if(state.attempts >= state.maxAttempts){
+      block.querySelectorAll('.grammar-choice').forEach(b => { b.style.pointerEvents='none'; b.disabled=true; });
+      tag.textContent = '❌ Max attempts (3/3)';
+      tag.className = 'attempt-tag maxed';
+    }
+  }
+}
+
+/* ============================================================
+   SECTION 5 — THREE STORIES (15 exercises)
+   ============================================================ */
+const STORIES = [
+  {
+    id:'story1', audio:'story1',
+    title:'Story 1 — Pilot Story (Flight Deck)',
+    sub:'Present Perfect in pilot communications',
+    exercises:[
+      { id:'s5a1', type:'tf', q:'The captain has already contacted the control tower to verify the departure schedule.', answer:true },
+      { id:'s5a2', type:'mcq', q:'What was the FIRST event that caused the crew to consider changing their plan?',
+        options:[
+          {t:'The weather conditions changed dramatically midway through the route', c:true},
+          {t:'The first officer updated the FMC with new waypoints', c:false},
+          {t:'They descended from FL350 to FL240', c:false}
+        ]},
+      { id:'s5a3', type:'open', q:'Based on the pilot\'s report, why has the crew decided to divert to an alternate destination? Explain what caused this decision.',
+        keywords:['storm','weather','heavy','divert','because','ahead'], minKeywords:2,
+        sample:'The crew has decided to divert because of heavy storms ahead and dramatic weather changes.' },
+      { id:'s5a4', type:'open', q:'What does the pilot say about their experience with this type of crosswind? What helped them manage the situation?',
+        keywords:['never','crosswind','preparation','pre-flight','checks','manage'], minKeywords:2,
+        sample:'They have never faced this exact type of crosswind before, but their preparation and pre-flight checks have helped them manage the situation.' },
+      { id:'s5a5', type:'open', q:'What is the current status of the aircraft at the end of the pilot\'s report?',
+        keywords:['runway','sight','final approach','ready','alternate','in sight'], minKeywords:2,
+        sample:'The runway at the alternate airport is in sight and they are ready for the final approach.' }
+    ]
+  },
+  {
+    id:'story2', audio:'story2',
+    title:'Story 2 — Passenger Story (Airport & Cabin)',
+    sub:'Present Perfect in passenger experience',
+    exercises:[
+      { id:'s5b1', type:'tf', q:'The passenger has already moved toward the active runway.', answer:false },
+      { id:'s5b2', type:'mcq', q:'Why has the aircraft NOT moved toward the active runway yet?',
+        options:[
+          {t:'Because they are waiting for one final luggage clearance from the ground crew', c:true},
+          {t:'Because there is a technical problem with the engines', c:false},
+          {t:'Because the captain has not arrived in the cockpit', c:false}
+        ]},
+      { id:'s5b3', type:'open', q:'Describe where the passenger has placed the heavy backpack and the small bag, and explain the difference.',
+        keywords:['overhead bin','under the seat','backpack','small bag','life vest','in front'], minKeywords:2,
+        sample:'The passenger has placed the heavy backpack in the overhead bin above the seat, and the small bag under the seat in front, where the life vest is located.' },
+      { id:'s5b4', type:'open', q:'What does the passenger say about the flight attendants\' work today? What have they already done?',
+        keywords:['secured','galley','bulkhead','working','checked','already'], minKeywords:2,
+        sample:'The flight attendants are working very hard today. They have already secured the galley and checked every single bulkhead.' },
+      { id:'s5b5', type:'open', q:'What has the passenger observed about the ground crew outside the window?',
+        keywords:['ground handlers','removed','air stairs','already','window'], minKeywords:2,
+        sample:'The ground handlers have already removed the air stairs.' }
+    ]
+  },
+  {
+    id:'story3', audio:'story3',
+    title:'Story 3 — Cabin Crew Story (In-Flight Service)',
+    sub:'Present Perfect in cabin crew operations',
+    exercises:[
+      { id:'s5c1', type:'tf', q:'The cabin crew has already completed the final safety demonstration video.', answer:false },
+      { id:'s5c2', type:'mcq', q:'What was the sequence of events that led to arming the emergency slides?',
+        options:[
+          {t:'First the captain contacted via interphone, then the crew armed the slides', c:true},
+          {t:'First the slides were armed, then the captain was informed', c:false},
+          {t:'The slides were armed before boarding started', c:false}
+        ]},
+      { id:'s5c3', type:'open', q:'What has the cabin crew already done for the passengers during boarding? Give specific examples from the story.',
+        keywords:['welcomed','passengers','assisted','luggage','overhead','boarding'], minKeywords:2,
+        sample:'They have welcomed hundreds of passengers on board and have already assisted several travelers with storing their luggage in the overhead compartments.' },
+      { id:'s5c4', type:'open', q:'Why has the cabin crew just armed the emergency slides? What was the trigger event?',
+        keywords:['captain','interphone','pushback','ready','contacted','slides'], minKeywords:2,
+        sample:'The captain has contacted them via the interphone to inform them that they are ready for pushback. Because of that, the cabin crew has just armed the emergency slides.' },
+      { id:'s5c5', type:'open', q:'What items has the cabin crew checked to ensure safety before departure?',
+        keywords:['bulkhead','exit door','emergency slides','secure','checked'], minKeywords:2,
+        sample:'They have checked that every bulkhead and exit door is completely secure, and have armed all the emergency slides.' }
+    ]
+  }
+];
+
+const storyState = {};
+
+function buildStories(){
+  const area = document.getElementById('storiesArea');
+  area.innerHTML = STORIES.map(story => {
+    const exHTML = story.exercises.map((ex, i) => {
+      storyState[ex.id] = { attempts:0, solved:false, maxAttempts: ex.type === 'tf' ? 1 : 3 };
+      if(ex.type === 'tf'){
+        return `
+          <div class="question-block" id="${ex.id}">
+            <div class="q-text">${i+1}. [T/F] ${ex.q} <span class="attempt-tag" id="${ex.id}-tag">1 attempt only</span></div>
+            <div class="tf-grid">
+              <button class="tf-btn" onclick="checkStoryTF('${ex.id}', this, true, ${ex.answer})">✅ TRUE</button>
+              <button class="tf-btn" onclick="checkStoryTF('${ex.id}', this, false, ${ex.answer})">❌ FALSE</button>
+            </div>
+          </div>
+        `;
+      } else if(ex.type === 'mcq'){
+        const shuffled = shuffle([...ex.options]);
+        return `
+          <div class="question-block" id="${ex.id}">
+            <div class="q-text">${i+1}. [MCQ] ${ex.q} <span class="attempt-tag" id="${ex.id}-tag">0/3 attempts</span></div>
+            <div class="opt-grid">
+              ${shuffled.map(o => `<button class="opt-btn" onclick="checkStoryMCQ('${ex.id}', this, ${o.c})">${o.t}</button>`).join('')}
+            </div>
+          </div>
+        `;
+      } else {
+        return `
+          <div class="question-block" id="${ex.id}">
+            <div class="q-text">${i+1}. [Open] ${ex.q} <span class="attempt-tag" id="${ex.id}-tag">0/3 attempts</span></div>
+            <textarea class="open-answer-input" id="${ex.id}-input" placeholder="Write your answer in a complete sentence..."></textarea>
+            <button class="open-check-btn" id="${ex.id}-check" onclick="checkStoryOpen('${ex.id}')">Check Answer</button>
+            <div class="dictation-feedback" id="${ex.id}-fb"></div>
+          </div>
+        `;
+      }
+    }).join('');
+
+    return `
+      <div class="story-section">
+        <h3>${story.title}</h3>
+        <p>${story.sub}</p>
+        <div class="audio-player-box">
+          <div class="audio-btn-group">
+            <button class="audio-btn play-btn" onclick="playAudio('${story.audio}')">🔊</button>
+            <button class="audio-btn pause-btn" onclick="pauseAudio()">⏸</button>
+          </div>
+          <div class="audio-info">
+            <h4>Listen to the story</h4>
+            <p>Replay as many times as needed</p>
+          </div>
+        </div>
+        ${exHTML}
+      </div>
+    `;
+  }).join('');
+}
+
+function checkStoryTF(qid, btn, chosen, answer){
+  const state = storyState[qid];
+  if(state.solved) return;
+
+  const block = document.getElementById(qid);
+  const tag = document.getElementById(qid+'-tag');
+  const isCorrect = chosen === answer;
+
+  if(isCorrect){
+    btn.classList.add('correct');
+    block.querySelectorAll('.tf-btn').forEach(b => { b.style.pointerEvents='none'; b.disabled=true; });
+    state.solved = true;
+    addCorrect('s5');
+    playDing();
+    tag.textContent = '✔ Correct!';
+    tag.style.color = 'var(--green)';
+    tag.style.background = '#e8f9ee';
+  } else {
+    btn.classList.add('wrong');
+    block.querySelectorAll('.tf-btn').forEach(b => { b.style.pointerEvents='none'; b.disabled=true; });
+    block.querySelectorAll('.tf-btn').forEach(b => {
+      const isTrue = b.textContent.includes('TRUE');
+      if((isTrue && answer === true) || (!isTrue && answer === false)){
+        b.classList.add('correct');
+      }
+    });
+    state.attempts++;
+    addWrong('s5');
+    playBuzz();
+    tag.textContent = '❌ Incorrect (1 attempt only)';
+    tag.className = 'attempt-tag maxed';
+  }
+}
+
+function checkStoryMCQ(qid, btn, isCorrect){
+  const state = storyState[qid];
+  if(state.solved) return;
+  if(state.attempts >= state.maxAttempts) return;
+
+  const block = document.getElementById(qid);
+  const tag = document.getElementById(qid+'-tag');
+
+  if(isCorrect){
+    btn.classList.add('correct');
+    block.querySelectorAll('.opt-btn').forEach(b => { b.style.pointerEvents='none'; b.disabled=true; });
+    state.solved = true;
+    addCorrect('s5');
+    playDing();
+    tag.textContent = '✔ Correct! (' + (state.attempts+1) + '/3)';
+    tag.style.color = 'var(--green)';
+    tag.style.background = '#e8f9ee';
+  } else {
+    btn.classList.add('wrong');
+    state.attempts++;
+    addWrong('s5');
+    playBuzz();
+    const rem = state.maxAttempts - state.attempts;
+    tag.textContent = state.attempts + '/3 attempts — ' + rem + ' left';
+    tag.style.color = 'var(--red)';
+    tag.style.background = '#fdecec';
+    setTimeout(()=>{ btn.classList.remove('wrong'); }, 600);
+    if(state.attempts >= state.maxAttempts){
+      block.querySelectorAll('.opt-btn').forEach(b => { b.style.pointerEvents='none'; b.disabled=true; });
+      tag.textContent = '❌ Max attempts (3/3)';
+      tag.className = 'attempt-tag maxed';
+    }
+  }
+}
+
+function checkStoryOpen(qid){
+  const state = storyState[qid];
+  if(state.solved) return;
+  if(state.attempts >= state.maxAttempts) return;
+
+  const ex = STORIES.flatMap(s => s.exercises).find(x => x.id === qid);
+  const input = document.getElementById(qid+'-input');
+  const fb = document.getElementById(qid+'-fb');
+  const tag = document.getElementById(qid+'-tag');
+  const val = input.value.trim().toLowerCase();
+
+  if(val.length < 10){
+    fb.textContent = '⚠️ Please write a complete answer (at least 10 characters).';
+    fb.className = 'dictation-feedback no';
+    return;
+  }
+
+  let hits = 0;
+  ex.keywords.forEach(kw => { if(val.includes(kw.toLowerCase())) hits++; });
+  const ok = hits >= ex.minKeywords;
+
+  if(ok){
+    state.solved = true;
+    input.disabled = true;
+    input.classList.add('correct');
+    addCorrect('s5');
+    fb.textContent = `✔ Correct! Sample: "${ex.sample}"`;
+    fb.className = 'dictation-feedback ok';
+    playDing();
+    document.getElementById(qid+'-check').disabled = true;
+    tag.textContent = '✔ Correct!';
+    tag.style.color = 'var(--green)';
+    tag.style.background = '#e8f9ee';
+  } else {
+    state.attempts++;
+    addWrong('s5');
+    input.classList.add('wrong');
+    const rem = state.maxAttempts - state.attempts;
+    fb.textContent = `❌ Missing key concepts (${hits}/${ex.minKeywords}). ${rem} attempts left.`;
+    fb.className = 'dictation-feedback no';
+    playBuzz();
+    tag.textContent = state.attempts + '/3 attempts';
+    tag.style.color = 'var(--red)';
+    tag.style.background = '#fdecec';
+    setTimeout(()=>{ input.classList.remove('wrong'); }, 800);
+    if(state.attempts >= state.maxAttempts){
+      input.disabled = true;
+      document.getElementById(qid+'-check').disabled = true;
+      tag.textContent = '❌ Max attempts (3/3)';
+      tag.className = 'attempt-tag maxed';
+      fb.textContent = `❌ Max attempts reached. Sample: "${ex.sample}"`;
+    }
+  }
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+const phaseBtns = document.querySelectorAll('.phase-btn');
+const phases = document.querySelectorAll('.phase');
+
+function goToPhase(n){
+  phases.forEach(p => p.classList.remove('active'));
+  phaseBtns.forEach(b => b.classList.remove('active'));
+  document.getElementById('phase'+n).classList.add('active');
+  document.querySelector(`.phase-btn[data-phase="${n}"]`).classList.add('active');
+  document.getElementById('topProgress').style.width = (n/6*100)+'%';
+  window.scrollTo({top:0, behavior:'smooth'});
+  if(n == 6) renderFinalReview();
+}
+phaseBtns.forEach(btn=>{
+  btn.addEventListener('click', ()=> goToPhase(parseInt(btn.dataset.phase)));
+});
+
+/* ============================================================
+   FINAL REVIEW
+   ============================================================ */
+function renderFinalReview(){
+  const totalAttempts = STATS.totalCorrect + STATS.totalWrong;
+  const pct = totalAttempts > 0 ? Math.round((STATS.totalCorrect/totalAttempts)*100) : 0;
+  const passed = pct >= 80;
+
+  let medal = '🥉', label = 'Keep practicing Flight 16!';
+  if(pct >= 90){ medal = '🥇'; label = 'Excellent! ICAO A2 Mastery!'; }
+  else if(pct >= 80){ medal = '🥈'; label = 'Great job! ICAO A2 achieved!'; }
+  else { medal = '🥉'; label = 'Below 80%. You must repeat the entire Lab.'; }
+
+  const rows = [
+    {label:'1. Dictation', val:STATS.sections.s1.correct, max:STATS.sections.s1.max},
+    {label:'2. Medium Listening', val:STATS.sections.s2.correct, max:STATS.sections.s2.max},
+    {label:'3. Long Listening', val:STATS.sections.s3.correct, max:STATS.sections.s3.max},
+    {label:'4. Grammar Drill', val:STATS.sections.s4.correct, max:STATS.sections.s4.max},
+    {label:'5. Stories (15 exercises)', val:STATS.sections.s5.correct, max:STATS.sections.s5.max},
+  ];
+
+  let resultHTML = '';
+  if(passed){
+    resultHTML = `<div class="result-box pass">✅ <strong>PASSED!</strong> You achieved ${pct}% — above the 80% requirement. Well done, Captain!</div>`;
+  } else {
+    resultHTML = `<div class="result-box fail">❌ <strong>NOT PASSED</strong> — You achieved ${pct}%. The minimum required is 80%. You must repeat the entire Lab.</div>`;
+  }
+
+  document.getElementById('finalArea').innerHTML = `
+    <div class="final-card">
+      <div class="medal">${medal}</div>
+      <h3>Flight 16 — Complete!</h3>
+      <div class="medal-label">${label}</div>
+      <div class="final-score-big">${pct}%</div>
+      <div class="final-score-sub">✅ ${STATS.totalCorrect} correct · ❌ ${STATS.totalWrong} errors · Total attempts: ${totalAttempts}</div>
+      ${resultHTML}
+      <div class="final-breakdown">
+        ${rows.map(r => `
+          <div class="fb-row">
+            <div class="fb-label">${r.label}</div>
+            <div class="fb-bar-outer"><div class="fb-bar-inner" style="width:${r.max > 0 ? (r.val/r.max*100) : 0}%;"></div></div>
+            <div class="fb-val">${r.val}/${r.max}</div>
+          </div>
+        `).join('')}
+      </div>
+      <button class="restart-btn" onclick="location.reload()">✈️ ${passed ? 'Fly Flight 16 Again' : 'Repeat Flight 16 (Required)'}</button>
+    </div>
+  `;
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+buildDictation();
+buildListening('listenMediumArea', LISTEN_MEDIUM, 's2');
+buildListening('listenLongArea', LISTEN_LONG, 's3');
+buildGrammar();
+buildStories();
+goToPhase(1);
+
+setTimeout(()=>{
+  if('speechSynthesis' in window) window.speechSynthesis.getVoices();
+}, 500);
+</script>
+</body>
+</html>
